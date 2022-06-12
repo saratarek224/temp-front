@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "temperature"
+    }
+  },
+  "defaultProject": "temperature",
+  "cli": {
+    "analytics": "4806aba0-debd-45ec-aed6-0a132d5dd709"
+  }
 }
