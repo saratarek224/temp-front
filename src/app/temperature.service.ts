@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ITemperature } from './interfaces/ITemperature';
 import { ITemperatureItem } from './interfaces/ITemperatureItem';
 
@@ -9,30 +10,24 @@ import { ITemperatureItem } from './interfaces/ITemperatureItem';
 })
 export class TemperatureService {
 
-  _url:string= "localhost:8084/temperatures"
-  constructor(private http : HttpClient) { }
+  _url: string = "localhost:8084/temperatures"
+  constructor(private http: HttpClient) { }
 
-  getAllTemps():Observable<ITemperature[]>
-  {
-    return this.http.get<ITemperature[]>(this._url).pipe(catchError((err)=>
-    {
-      return throwError(()=>err.message || "Server error")
+  getAllTemps(): Observable<ITemperature[]> {
+    return this.http.get<ITemperature[]>(this._url).pipe(catchError((err) => {
+      return throwError(() => err.message || "Server error")
     }))
   }
 
-  addTemperature(temp:String)
-  {
-    return this.http.post(this._url,temp).pipe(catchError((err)=>
-    {
-      return throwError(()=>err.message || "Server error")
+  addTemperature(temp: String) {
+    return this.http.post(this._url, temp).pipe(catchError((err) => {
+      return throwError(() => err.message || "Server error")
     }))
   }
 
-  getTemperature(deviceId:Number):Observable<ITemperatureItem[]>
-  {
-    return this.http.get(this._url+`/${deviceId}`).pipe(catchError((err)=>
-    {
-      return throwError(()=>err.message || "Server error")
+  getTemperature(deviceId: Number): Observable<ITemperatureItem[]> {
+    return this.http.get<ITemperatureItem[]>(this._url + `/${deviceId}`).pipe(catchError((err) => {
+      return throwError(() => err.message || "Server error")
     }))
   }
 

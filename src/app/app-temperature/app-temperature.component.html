@@ -1,1 +1,46 @@
 <p>app-temperature works!</p>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <input type="text" #deviceNum>
+        <input value="Show temp" type="button" class="btn btn-danger" (click)="toSendDNumber(deviceNum.value)" />
+    </div>
+</div>
+
+<section class="container my-4">
+    <div class="alert alert-primary text-center p-1">
+        <h3>Temp</h3>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="text-center">
+                <th>Device number</th>
+                <th>Temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                *ngFor="let item of devicesTemp"
+                <td (click)="toViewSubTable(item.deviceId)"><a href="#">{{item.deviceId}}</a></td>
+                <td>{{item.temp}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-bordered" *ngIf="subDeviceNum">
+        <thead>
+            <tr class="text-center">
+                <th>Temperature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                *ngFor="let subItem of subDeviceNum.temperature"
+                <td>{{subItem.temp}}</td>
+                <td>{{subItem.date}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
